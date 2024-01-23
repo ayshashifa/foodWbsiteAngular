@@ -1,0 +1,92 @@
+  <div *ngFor="let profile of profiles" class="profile">
+    <img [src]="profile.url" width="200px"/>
+    <div>
+      <span>{{ profile.name }}</span>
+    </div>
+</div>
+<!-- <form [formGroup]="form" (submit)="onSubmit()">
+ 
+  <div>
+    <input formControlName="file" (change)="onFileSelect($event)" type="file" />
+  </div>
+  <div *ngIf="imageData">
+    <img [src]="imageData" [alt]="form.value.name" />
+  </div>
+  <div>
+    <button type="submit">Create profile</button>
+  </div>
+</form> -->
+<!-- upload.component.html -->
+<div>
+  <input type="file" (change)="onFileSelected($event)" />
+  <button (click)="onUpload()">Upload Image</button>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<app-title title="Cart Page" margin="1.5rem 0 0 2.5rem"></app-title>
+<app-not-found
+  [visible]="!cart || !cart.items.length"
+  notFoundMessage="Cart Page Is Empty!"
+  resetLinkText="Go To Homepage"
+></app-not-found>
+<div *ngIf="cart && cart.items.length" class="container">
+<ul>
+  <li *ngFor="let cartItem of cart.items">
+    <div>
+      <img [src]="cartItem.food.imageUrl" [alt]="cartItem.food.name">
+    </div>
+    <div>
+      <a routerLink="/food/{{cartItem.food.id}}">
+        {{cartItem.food.name}}
+      </a>
+    </div>
+    <div>
+      <select #quantitySelect
+      [value]="cartItem.quantity"
+      (change)="changeQuantity(cartItem, quantitySelect.value)">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+    </div>
+    <div>
+      {{cartItem.price | currency}}
+    </div>
+
+    <div>
+      <button class="remove-button" (click)="removeFromCart(cartItem)">
+        Remove
+      </button>
+    </div>
+  </li>
+</ul>
+<div class="checkout">
+  <div>
+    <div class="foods-count">{{cart.totalCount}}</div>
+    <div class="total-price">{{cart.totalPrice|currency}}</div>
+  </div>
+
+  <a routerLink="/checkout">Proceed to Checkout</a>
+</div>
+</div>
