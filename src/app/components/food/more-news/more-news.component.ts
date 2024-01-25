@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { appApiResources } from 'src/app/constants/app.constants';
 import { HttpClient, HttpParams } from '@angular/common/http';
-
+import { appApiResources } from 'src/app/constants/app.constants';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-more-news',
   templateUrl: './more-news.component.html',
@@ -10,11 +10,21 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class MoreNewsComponent implements OnInit {
   news: any[] = [];
   tags!: string[];
-    newsDetails: any;
-  constructor(private http: HttpClient) {}
+  newsDetails: any;
+  commentform!: FormGroup;
+
+  constructor(
+    private http: HttpClient,
+    private fb: FormBuilder,
+  ) {}
 
   ngOnInit(): void {
     this.getnews();
+    this.commentform = this.fb.group({
+      name: ['', Validators.required],
+      comment: ['', Validators.required],
+      email: ['', Validators.required],
+    });
   }
 
   getnews(): void {
@@ -36,10 +46,12 @@ export class MoreNewsComponent implements OnInit {
       next: (data: any) => {
         if (data.status === 'true') {
           this.newsDetails = data.getdetails;
-          this.tags = this.newsDetails.tags.split(',').map((tag: string) => tag.trim());  
+          this.tags = this.newsDetails.tags
+            .split(',')
+            .map((tag: string) => tag.trim());
           console.log('inner', this.newsDetails);
           console.log('tags', this.tags);
-          console.log("comment",this.newsDetails.comments)
+          console.log('comment', this.newsDetails.comments);
         } else {
           console.error('Error fetching news details:', data);
         }
@@ -47,6 +59,35 @@ export class MoreNewsComponent implements OnInit {
       error: (error: any) => {
         console.error('Error fetching news details:', error);
       },
+    });
+  }
+  message: any;
+  onSubmit(newsId: number) {
+    if (this.commentform.valid) {
+      const body = {
+        name: this.commentform.value.name,
+        email: this.commentform.value.email,
+        comment: this.commentform.value.comment,
+        news_id: newsId,
+      };
+      this.http.post(appApiResources.postcomment, body).subscribe({
+        next: (data: any) => {
+          if (data.status === true) {
+            alert("success")
+            this.message = data.message;
+            console.log('test', this.message);
+            setTimeout(() => {
+              location.reload();
+            }, 2000);
+          } else {
+          }
+        },
+      });
+    }
+  }
+  markAllControlsAsTouched() {
+    Object.keys(this.commentform.controls).forEach(controlName => {
+      this.commentform.get(controlName)?.markAsTouched();
     });
   }
 }

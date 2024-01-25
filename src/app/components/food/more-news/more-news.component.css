@@ -1,0 +1,21 @@
+input, textarea {
+    width: 100%; 
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 10px; 
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column; 
+  }
+  
+  button {
+    border: unset;
+    background-color: #F28123;
+    color: white;
+    border-radius: 8px;
+    padding: 8px;
+    width: 100px;
+  }
+  

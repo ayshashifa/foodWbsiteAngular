@@ -24,8 +24,5 @@ export class HttpService {
   delete(url: string) {
     return this.http.delete(this.baseurl + url);
   }
-  // getId(newsId: number): Observable<any> {
-  //   const url = `${this.baseurl}/${newsId}`;
-  //   return this.http.get(url);
-  // }
+
 }
