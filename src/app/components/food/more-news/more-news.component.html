@@ -104,19 +104,18 @@
               <div class="comment-list">
                 <div
                   class="single-comment-body"
-                  *ngFor="let comment of newsDetails.comments"
+                  *ngFor="let data of listComment"
                 >
-                  <div class="comment-user-avater">
+                  <!-- <div class="comment-user-avater">
                     <img [src]="comment.profile" alt="" />
-                  </div>
+                  </div> -->
                   <div class="comment-text-body">
                     <h4>
-                      {{ comment.name }}
-                      <span class="comment-date">{{ comment.date }}</span>
-                      <!-- <a href="#">reply</a> -->
+                      {{ data.name }}
+                      <span class="comment-date">{{ data.createdAt }}</span>
                     </h4>
                     <p>
-                      {{ comment.commentCustomer }}
+                      {{ data.comment }}
                     </p>
                   </div>
                 </div>

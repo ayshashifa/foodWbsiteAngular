@@ -18,6 +18,5 @@ export const appApiResources = {
   postimage: createUrl('/upload'),
   getmoreNews: createUrl('/food/news/short'),
   getnewsId: createUrl('/food/news/'),
-  getcomment: createUrl('/food/news/comment'),
   postcomment : createUrl('/food/news/comments'),
 };

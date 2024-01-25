@@ -12,11 +12,9 @@ export class MoreNewsComponent implements OnInit {
   tags!: string[];
   newsDetails: any;
   commentform!: FormGroup;
+  listComment:any;
 
-  constructor(
-    private http: HttpClient,
-    private fb: FormBuilder,
-  ) {}
+  constructor(private http: HttpClient, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.getnews();
@@ -46,12 +44,10 @@ export class MoreNewsComponent implements OnInit {
       next: (data: any) => {
         if (data.status === 'true') {
           this.newsDetails = data.getdetails;
+          this.listComment = data.getcomment;
           this.tags = this.newsDetails.tags
             .split(',')
             .map((tag: string) => tag.trim());
-          console.log('inner', this.newsDetails);
-          console.log('tags', this.tags);
-          console.log('comment', this.newsDetails.comments);
         } else {
           console.error('Error fetching news details:', data);
         }
@@ -73,7 +69,7 @@ export class MoreNewsComponent implements OnInit {
       this.http.post(appApiResources.postcomment, body).subscribe({
         next: (data: any) => {
           if (data.status === true) {
-            alert("success")
+            alert('success');
             this.message = data.message;
             console.log('test', this.message);
             setTimeout(() => {
@@ -86,8 +82,9 @@ export class MoreNewsComponent implements OnInit {
     }
   }
   markAllControlsAsTouched() {
-    Object.keys(this.commentform.controls).forEach(controlName => {
+    Object.keys(this.commentform.controls).forEach((controlName) => {
       this.commentform.get(controlName)?.markAsTouched();
     });
   }
+
 }
