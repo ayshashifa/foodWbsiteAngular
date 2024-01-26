@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
+import { appApiResources } from 'src/app/constants/app.constants';
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShopComponent implements OnInit {
 
-  constructor() { }
+  shopList: any[] = [];
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
+    this.getShopList();
   }
-
+  getShopList() {
+    this.http.get(appApiResources.getShopList).subscribe({
+      next: (data: any) => {
+        this.shopList = data.datas;
+        console.log(this.shopList);
+      },
+    });
+  }
+  
 }

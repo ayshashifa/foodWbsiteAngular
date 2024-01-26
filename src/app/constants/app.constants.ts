@@ -19,4 +19,5 @@ export const appApiResources = {
   getmoreNews: createUrl('/food/news/short'),
   getnewsId: createUrl('/food/news/'),
   postcomment : createUrl('/food/news/comments'),
+  getShopList:createUrl('/food/shop/list'),
 };

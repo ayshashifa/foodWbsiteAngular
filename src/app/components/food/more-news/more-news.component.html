@@ -20,7 +20,7 @@
       <div class="row">
         <div class="col-lg-4 col-md-6" *ngFor="let data of news">
           <div class="single-latest-news">
-            <img class="latest-news-bg news-bg-1" [src]="data.url" alt="" />
+            <img class="latest-news-bg news-bg-1" [src]="data.url"  alt="" />
             <div class="news-text-box">
               <h3>
                 <a href="single-news.html">{{ data.title }}</a>
@@ -42,7 +42,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <!-- <div class="row">
         <div class="container">
           <div class="row">
             <div class="col-lg-12 text-center">
@@ -58,7 +58,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <!-- end latest news -->
@@ -86,7 +86,7 @@
         <div class="col-lg-8">
           <div class="single-article-section">
             <div class="single-article-text">
-              <img src="{{ newsDetails.url }}" alt="" />
+              <img src="{{ newsDetails.url }}" alt="" class="p-3" />
               <p class="blog-meta">
                 <span class="author"
                   ><i class="fas fa-user"></i> {{ newsDetails.admin }}</span
