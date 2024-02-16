@@ -8,35 +8,27 @@ import { appApiResources } from 'src/app/constants/app.constants';
   styleUrls: ['./single-product.component.css'],
 })
 export class SingleProductComponent implements OnInit {
-//   shoplist: any[] = [];
-//   constructor(private route: ActivatedRoute, private http: HttpClient) {}
-
-//   ngOnInit(): void {
-//     this.getshopdetails();
-//     this.route.params.subscribe((params) => {
-//       const productId = params['shop_id'];
-//       // Do something with productId
-//     });
-//   }
-//   getshopdetails() {
-//     this.http.get(appApiResources.getShopList).subscribe({
-//       next: (data: any) => {
-//         this.shoplist = data.datas;
-//         console.log(this.shoplist)
-//       },
-//     });
-//   }
-// }
-  shopId!: string;
-  imagePath!: string;
-
-constructor(private route: ActivatedRoute) { }
-
-ngOnInit(): void {
-   // Accessing the parameters
-   this.route.params.subscribe(params => {
-      this.shopId = params['id'];
-      this.imagePath = params['imagePath'];
-   });
-}
+  fragment: any | null;
+  singleData: any[] = [];
+  singleName: any;
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
+    this.fragment = null;
+  }
+  ngOnInit(): void {
+    this.route.fragment.subscribe((fragment: string | null) => {
+      console.log('fragement', fragment);
+      this.fragment = fragment;
+    });
+    this.getsingleData();
+  }
+  getsingleData() {
+    const url = `${appApiResources.getSingleShopList}${this.fragment}`;
+    this.http.get(url).subscribe({
+      next: (data: any) => {
+        this.singleData = data.datas;
+        this.singleName = this.singleData;
+        console.log("gyuyu",this.singleData)
+      },
+    });
+  }
 }
