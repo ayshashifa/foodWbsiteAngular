@@ -20,6 +20,8 @@ export const appApiResources = {
   getnewsId: createUrl('/food/news/'),
   postcomment : createUrl('/food/news/comments'),
   getShopList:createUrl('/food/shop/list'),
-  postShopItems:createUrl('/food/shop/list'),
-  getSingleShopList:createUrl('/food/shop/')
+  postShopItems:createUrl('/food/shop/list'),//
+  getSingleShopList:createUrl('/food/shop/'),
+  getcontactUs:createUrl('/food/contactUs'),//
+  postContactUs:createUrl('/food/contactUs'),
 };
