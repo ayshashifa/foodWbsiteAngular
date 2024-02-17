@@ -77,30 +77,30 @@
 				<div class="col-lg-4 col-md-6 text-center" routerLink="/single-product">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/product-img-1.jpg" alt=""></a>
+							<a href="single-product.html"><img [src]="firstshop.imagePath" alt=""></a>
 						</div>
-						<h3>Strawberry</h3>
-						<p class="product-price"><span>Per Kg</span> 85$ </p>
+						<h3>{{firstshop.name}}</h3>
+						<p class="product-price"><span>Per Kg</span> {{firstshop.price}}$ </p>
 						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6 text-center"  routerLink="/single-product">
+				<div class="col-lg-4 col-md-6 text-center" routerLink="/single-product">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/product-img-2.jpg" alt=""></a>
+							<a href="single-product.html"><img [src]="secshop.imagePath" alt=""></a>
 						</div>
-						<h3>Berry</h3>
-						<p class="product-price"><span>Per Kg</span> 70$ </p>
+						<h3>{{secshop.name}}</h3>
+						<p class="product-price"><span>Per Kg</span> {{secshop.price}}$ </p>
 						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center"  routerLink="/single-product">
+				<div class="col-lg-4 col-md-6 text-center" routerLink="/single-product">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/product-img-3.jpg" alt=""></a>
+							<a href="single-product.html"><img [src]="thirdshop.imagePath" alt=""></a>
 						</div>
-						<h3>Lemon</h3>
-						<p class="product-price"><span>Per Kg</span> 35$ </p>
+						<h3>{{thirdshop.name}}</h3>
+						<p class="product-price"><span>Per Kg</span> {{thirdshop.price}}$ </p>
 						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
 					</div>
 				</div>
@@ -242,16 +242,46 @@
 			</div>
 
 			<div class="row">
-				<div class="col-lg-4 col-md-6" *ngFor="let data of news">
+				<div class="col-lg-4 col-md-6">
 					<div class="single-latest-news">
-						<a href="single-news.html"><img [src]="data.url" alt=""></a>
+						<a href="single-news.html"><img [src]="firstdata.url" alt=""></a>
 						<div class="news-text-box">
-							<h3><a href="single-news.html">{{data.title}}</a></h3>
+							<h3><a href="single-news.html">{{firstdata.title}}</a></h3>
 							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> {{data.admin}}</span>
-								<span class="date"><i class="fas fa-calendar"></i> {{data.publishedDate}}</span>
+								<span class="author"><i class="fas fa-user"></i> {{firstdata.admin}}</span>
+								<span class="date"><i class="fas fa-calendar"></i> {{firstdata.publishedDate}}</span>
 							</p>
-							<p class="excerpt">{{data.content}}							</p>
+							<p class="excerpt">{{firstdata.content}}							</p>
+							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<!--  -->
+				<div class="col-lg-4 col-md-6">
+					<div class="single-latest-news">
+						<a href="single-news.html"><img [src]="secdata.url" alt=""></a>
+						<div class="news-text-box">
+							<h3><a href="single-news.html">{{secdata.title}}</a></h3>
+							<p class="blog-meta">
+								<span class="author"><i class="fas fa-user"></i> {{secdata.admin}}</span>
+								<span class="date"><i class="fas fa-calendar"></i> {{secdata.publishedDate}}</span>
+							</p>
+							<p class="excerpt">{{secdata.content}}							</p>
+							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<!--  -->
+				<div class="col-lg-4 col-md-6">
+					<div class="single-latest-news">
+						<a href="single-news.html"><img [src]="thirddata.url" alt=""></a>
+						<div class="news-text-box">
+							<h3><a href="single-news.html">{{thirddata.title}}</a></h3>
+							<p class="blog-meta">
+								<span class="author"><i class="fas fa-user"></i> {{thirddata.admin}}</span>
+								<span class="date"><i class="fas fa-calendar"></i> {{thirddata.publishedDate}}</span>
+							</p>
+							<p class="excerpt">{{thirddata.content}}							</p>
 							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
 						</div>
 					</div>
