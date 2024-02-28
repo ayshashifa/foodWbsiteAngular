@@ -24,4 +24,6 @@ export const appApiResources = {
   getSingleShopList:createUrl('/food/shop/'),
   getcontactUs:createUrl('/food/contactUs'),//
   postContactUs:createUrl('/food/contactUs'),
+  signUp:createUrl('/signup'),
+  login:createUrl('/login'),
 };
