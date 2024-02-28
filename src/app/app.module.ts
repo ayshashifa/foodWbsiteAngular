@@ -28,6 +28,8 @@ import { SingleNewsArticleComponent } from './components/food/single-news-articl
 import { MoreNewsComponent } from './components/food/more-news/more-news.component';
 import { CheckoutComponent } from './components/food/checkout/checkout.component';
 import { SingleProductComponent } from './components/food/single-product/single-product.component';
+import { LoginComponent } from './components/food/auth/login/login.component';
+import { SignUpComponent } from './components/food/auth/sign-up/sign-up.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +53,8 @@ import { SingleProductComponent } from './components/food/single-product/single-
     MoreNewsComponent,
     CheckoutComponent,
     SingleProductComponent,
+    LoginComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,

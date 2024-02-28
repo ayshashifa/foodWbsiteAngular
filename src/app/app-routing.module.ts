@@ -13,27 +13,31 @@ import { SingleNewsArticleComponent } from './components/food/single-news-articl
 import { MoreNewsComponent } from './components/food/more-news/more-news.component';
 import { CheckoutComponent } from './components/food/checkout/checkout.component';
 import { SingleProductComponent } from './components/food/single-product/single-product.component';
+import { LoginComponent } from './components/food/auth/login/login.component';
+import { SignUpComponent } from './components/food/auth/sign-up/sign-up.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'search/:searchTerm', component: HomeComponent },
   { path: 'tag/:tag', component: HomeComponent },
-  {path:'food/:id', component:FoodPageComponent},
-  {path:'cart-page', component: CartPageComponent},
-  {path:'landing-page', component:LandingPageComponent},
-  {path:'about-us',component:AboutUsComponent},
-  {path:'new',component:NewComponent},
-  {path:'contact',component:ContactUsComponent},
-  {path:'shop',component:ShopComponent},
-  {path:'cart',component:CartComponent},
-  {path:'single-news',component:SingleNewsArticleComponent},
-  {path:'more-news',component:MoreNewsComponent},
-  {path:'check-out',component:CheckoutComponent},
-  {path:'single-product',component:SingleProductComponent}
+  { path: 'food/:id', component: FoodPageComponent },
+  { path: 'cart-page', component: CartPageComponent },
+  { path: 'landing-page', component: LandingPageComponent },
+  { path: 'about-us', component: AboutUsComponent },
+  { path: 'new', component: NewComponent },
+  { path: 'contact', component: ContactUsComponent },
+  { path: 'shop', component: ShopComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'single-news', component: SingleNewsArticleComponent },
+  { path: 'more-news', component: MoreNewsComponent },
+  { path: 'check-out', component: CheckoutComponent },
+  { path: 'single-product', component: SingleProductComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignUpComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
