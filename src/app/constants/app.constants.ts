@@ -26,4 +26,6 @@ export const appApiResources = {
   postContactUs:createUrl('/food/contactUs'),
   signUp:createUrl('/signup'),
   login:createUrl('/login'),
+  otpVerify:createUrl('/verifyOtp'),
+  getUserData:createUrl( '/userdata'),
 };

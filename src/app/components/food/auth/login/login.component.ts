@@ -8,24 +8,24 @@ import { appApiResources } from 'src/app/constants/app.constants';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginform!: FormGroup;
+  // loginform!: FormGroup;
   constructor(private http: HttpClient, public fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.loginform = this.fb.group({
-      email: ['', Validators.required],
-      phone: ['', Validators.required],
-    });
+    // this.loginform = this.fb.group({
+    //   email: ['', Validators.required],
+    //   phone: ['', Validators.required],
+    // });
   }
-  login() {
-    if (this.loginform.valid) {
-      const body = {
-        email: this.loginform.value.email,
-        phone: this.loginform.value.phone,
-      };
-      this.http.post(appApiResources.login, body).subscribe({
-        next: (data: any) => {},
-      });
-    }
-  }
+  // login() {
+  //   if (this.loginform.valid) {
+  //     const body = {
+  //       email: this.loginform.value.email,
+  //       phone: this.loginform.value.phone,
+  //     };
+  //     this.http.post(appApiResources.login, body).subscribe({
+  //       next: (data: any) => {},
+  //     });
+  //   }
+  // }
 }
