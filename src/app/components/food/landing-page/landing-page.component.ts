@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { appApiResources, backendUrl } from 'src/app/constants/app.constants';
+import { appApiResources } from 'src/app/constants/app.constants';
 import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-landing-page',

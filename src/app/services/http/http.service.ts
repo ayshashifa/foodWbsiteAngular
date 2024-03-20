@@ -7,22 +7,22 @@ import { Observable } from 'rxjs';
 export class HttpService {
   constructor(private http: HttpClient) { }
 
-  baseurl = ''
+  // baseurl = ''
 
   post(url: string, user: any) {
-    return this.http.post(this.baseurl + url, user);
+    return this.http.post( url, user);
   }
 
   put(url: string, user: any) {
-    return this.http.put(this.baseurl + url, user);
+    return this.http.put(url, user);
   }
 
   get(url: string) {
-    return this.http.get(this.baseurl + url);
+    return this.http.get(url);
   }
 
   delete(url: string) {
-    return this.http.delete(this.baseurl + url);
+    return this.http.delete(url);
   }
 
 }

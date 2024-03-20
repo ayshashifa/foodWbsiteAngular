@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { appApiResources } from 'src/app/constants/app.constants';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -10,7 +11,7 @@ import { appApiResources } from 'src/app/constants/app.constants';
 export class SignUpComponent implements OnInit {
   newform!: FormGroup;
 
-  constructor(public fb: FormBuilder, private http: HttpClient) {}
+  constructor(public fb: FormBuilder, private http: HttpClient,public router:Router) {}
   // email: ['', [Validators.required, Validators.email]],
   ngOnInit(): void {
     this.newform = this.fb.group({
@@ -20,7 +21,6 @@ export class SignUpComponent implements OnInit {
       phone: ['', Validators.required],
     });
   }
-  // ssmnn.vaseem03@hmail.com
   submitForm() {
     if (this.newform.valid) {
       const body = {
@@ -33,6 +33,7 @@ export class SignUpComponent implements OnInit {
         next: (newUser: any) => {
           if (newUser.status === true) {
             alert('success' + newUser.message);
+            this.router.navigate([''])
           } else {
             alert('fail' + newUser.message);
           }

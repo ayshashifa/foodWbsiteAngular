@@ -52,21 +52,16 @@ export class HeaderComponent implements OnInit {
   }
   show = true;
   type: string = '';
-  // lang = localStorage.getItem('lang') || 'english';
   token = localStorage.getItem('token') || '';
-  // changeLang(data: string) {
-  //   localStorage.setItem('lang', data);
-  //   location.reload();
-  // }
 
-  openOtp(email: any, type: any) {
+  openOtp(email: any) {
     if (!email) {
       alert('Email is required');
       return;
     }
     this.loading = true;
     this.http
-      .post(appApiResources.login, { email: email, type: type })
+      .post(appApiResources.login, { email: email })
       .subscribe({
         next: (data: any) => {
           this.loading = false;
@@ -81,14 +76,14 @@ export class HeaderComponent implements OnInit {
       });
   }
   headerText: any = '';
-  loginWIthOTP(otp: any, email: any, type: any) {
+  loginWIthOTP(otp: any, email: any) {
     if (!otp || otp.length != 6) {
       alert('Enter Valid 6 digit OTP Number');
       return;
     }
     this.loading = true;
     this.http
-      .post(appApiResources.otpVerify, { otp: otp, email: email, type: type })
+      .post(appApiResources.otpVerify, { otp: otp, email: email })
       .subscribe({
         next: (data: any) => {
           console.log('data');
@@ -109,7 +104,6 @@ export class HeaderComponent implements OnInit {
             } else  {
               this.headerText = 'dashboard';
               this.router.navigate(['/dashboard']);
-              // this.Sponsorship = true;
               setTimeout(() => {
                 location.reload();
               });
@@ -142,28 +136,12 @@ export class HeaderComponent implements OnInit {
   donor = false;
   opendonorlogin() {
     this.openLoginPopup.nativeElement.click();
-    // this.type = 'Donor';
     this.donor = true;
     this.Sponsorship = false;
   }
   openrecipientlogin() {
     this.openLoginPopup.nativeElement.click();
-    // this.type = 'sponsorship';
     this.Sponsorship = true;
     this.donor = false;
-  }
-  downloadPdf() {
-    const pdfUrl = '../../../../assets/new/StepsRegistration.pdf';
-    fetch(pdfUrl)
-      .then((response) => response.blob())
-      .then((blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'GuideMe.pdf'; 
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-      });
   }
 }

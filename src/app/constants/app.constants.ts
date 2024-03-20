@@ -5,13 +5,16 @@ export const AppConstants = {
     LIVE: 'http://localhost:8000',
   },
 };
-export function backendUrl() {
-  return AppConstants.SERVER_CONFIG.LIVE;
-}
-function createUrl(urlName: string) {
-  return backendUrl() + urlName;
-}
+// export function backendUrl() {
+//   return AppConstants.SERVER_CONFIG.LIVE;
+// }
+// function createUrl(urlName: string) {
+//   return backendUrl() + urlName;
+// }
+function createUrl(urlName:string){
+  return AppConstants.SERVER_CONFIG.LIVE+urlName;
 
+}
 export const appApiResources = {
   //  getexpenditurelist:createUrl('/aysha/tabledetails')
   getexpenditurelist: createUrl('/files'),

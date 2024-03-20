@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
+import { HttpService } from 'src/app/services/http/http.service';
 import { appApiResources } from 'src/app/constants/app.constants';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
@@ -14,7 +15,7 @@ export class MoreNewsComponent implements OnInit {
   commentform!: FormGroup;
   listComment:any;
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {}
+  constructor(private service: HttpService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.getnews();
@@ -26,7 +27,7 @@ export class MoreNewsComponent implements OnInit {
   }
 
   getnews(): void {
-    this.http.get(appApiResources.getmoreNews).subscribe({
+    this.service.get(appApiResources.getmoreNews).subscribe({
       next: (data: any) => {
         this.news = data;
         console.log('news', this.news);
@@ -40,7 +41,7 @@ export class MoreNewsComponent implements OnInit {
   readmore(newsId: number) {
     this.selectedNewsId = newsId;
     const apiEndpoint = `${appApiResources.getnewsId}${newsId}`;
-    this.http.get(apiEndpoint).subscribe({
+    this.service.get(apiEndpoint).subscribe({
       next: (data: any) => {
         if (data.status === 'true') {
           this.newsDetails = data.getdetails;
@@ -66,7 +67,7 @@ export class MoreNewsComponent implements OnInit {
         comment: this.commentform.value.comment,
         news_id: newsId,
       };
-      this.http.post(appApiResources.postcomment, body).subscribe({
+      this.service.post(appApiResources.postcomment, body).subscribe({
         next: (data: any) => {
           if (data.status === true) {
             alert('success');

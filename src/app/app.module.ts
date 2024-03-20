@@ -30,6 +30,8 @@ import { CheckoutComponent } from './components/food/checkout/checkout.component
 import { SingleProductComponent } from './components/food/single-product/single-product.component';
 import { LoginComponent } from './components/food/auth/login/login.component';
 import { SignUpComponent } from './components/food/auth/sign-up/sign-up.component';
+import { TestService } from './test.service';
+import { TestPipe } from './test.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +57,7 @@ import { SignUpComponent } from './components/food/auth/sign-up/sign-up.componen
     SingleProductComponent,
     LoginComponent,
     SignUpComponent,
+    TestPipe,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,7 @@ import { SignUpComponent } from './components/food/auth/sign-up/sign-up.componen
     BrowserAnimationsModule,
     ReactiveFormsModule,
   ],
-  providers: [
+  providers: [ TestService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 
   ],

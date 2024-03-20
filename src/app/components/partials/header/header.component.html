@@ -1,31 +1,3 @@
-<!-- 
-<header>
-  <div class="container">
-    <a routerLink="/" class="logo">TC ☺ Food Corner</a>
-    <nav>
-      <ul>
-        <li>
-          <a routerLink="/login">Login</a>
-        </li>
-        <li class="menu-container">
-          <a routerLink="/dashboard">Testy Codeiz</a>
-          <div class="menu">
-            <a routerLink="/profile">Profile</a>
-            <a routerLink="/orders">Orders</a>
-            <a>Logout</a>
-          </div>
-        </li>
-        <li>
-          <a routerLink="/cart-page">
-            Cart <span>{{cartQuantity}}</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</header> -->
-
-
 <div class="top-header-area" id="sticker">
   <div class="container">
     <div class="row">
@@ -34,7 +6,7 @@
           <!-- logo -->
           <div class="site-logo">
             <a href="index.html">
-              <img src="assets/img/logo.png" alt="">
+              <img src="assets/img/logo.png" alt="" />
             </a>
           </div>
           <!-- logo -->
@@ -42,51 +14,210 @@
           <!-- menu start -->
           <nav class="main-menu">
             <ul>
-              <li class="current-list-item"><a routerLink="/landing-page">Home</a>
-                
+              <li class="current-list-item">
+                <a routerLink="/landing-page">Home</a>
               </li>
-              <li><a  routerLink="/about-us">About</a></li>
-              <!-- <li><a href="#">Pages</a>
-                <ul class="sub-menu">
-                  <li><a href="404.html">404 page</a></li>
-                  <li><a href="about.html">About</a></li>
-                  <li><a href="cart.html">Cart</a></li>
-                  <li><a href="checkout.html">Check Out</a></li>
-                  <li><a routerLink="contact">Contact</a></li>
-                  <li><a href="news.html">News</a></li>
-                  <li><a href="shop.html">Shop</a></li>
-                </ul>
-              </li> -->
-              <li><a routerLink="/more-news">News</a>
-                <!-- <ul class="sub-menu">
-                  <li><a href="news.html">News</a></li>
-                  <li><a href="single-news.html">Single News</a></li>
-                </ul> -->
+              <li><a routerLink="/about-us">About</a></li>
+              <li>
+                <a routerLink="/more-news">News</a>
               </li>
               <li><a routerLink="/contact">Contact</a></li>
-              <li><a routerLink="/shop">Shop</a>
-                <!-- <ul class="sub-menu">
-                  <li><a href="shop.html">Shop</a></li>
-                  <li><a href="checkout.html">Check Out</a></li>
-                  <li><a href="single-product.html">Single Product</a></li>
-                  <li><a href="cart.html">Cart</a></li>
-                </ul> -->
+              <li>
+                <a routerLink="/shop">Shop</a>
+              </li>
+              <li>
+                <ng-container *ngIf="!token">
+                  <span data-bs-toggle="modal" data-bs-target="#loginModal"
+                    >Login
+                  </span>
+                  <span [routerLinkActive]="['active']" routerLink="/signup"
+                    >SignUp</span
+                  >
+                </ng-container>
+              </li>
+              <li>
+                <ng-container *ngIf="token">
+                  <span (click)="logout()"> Logout </span>
+                </ng-container>
               </li>
               <li>
                 <div class="header-icons">
-                  <a class="shopping-cart" routerLink="/cart"><i class="fas fa-shopping-cart"></i></a>
-                  <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                  <a class="shopping-cart" routerLink="/cart"
+                    ><i class="fas fa-shopping-cart"></i
+                  ></a>
+                  <a class="mobile-hide search-bar-icon" href="#"
+                    ><i class="fas fa-search"></i
+                  ></a>
                 </div>
               </li>
             </ul>
           </nav>
-          <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+          <a class="mobile-show search-bar-icon" href="#"
+            ><i class="fas fa-search"></i
+          ></a>
           <div class="mobile-menu"></div>
           <!-- menu end -->
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<!-- login code is working but now mela irukathunala work agala header container la irutha work agum
+but flow correction ituku -->
+<!-- Login Modal -->
+<div
+  class="modal fade"
+  id="loginModal"
+  tabindex="-1"
+  aria-labelledby="loginModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="color: #7f4b1e">
+          Login
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body p-3">
+        <div class="form-group">
+          <label>Email</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Email Id"
+            #loginEmail
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- Donor Login Button -->
+        <button
+          [class.disable-btn]="loading"
+          type="button"
+          class="modal-submit"
+          (click)="openOtp(loginEmail.value)"
+        >
+          Send OTP
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            *ngIf="loading"
+          ></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--OTP Modal -->
+<div
+  class="modal fade"
+  id="otpModal"
+  tabindex="-1"
+  aria-labelledby="otpModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="color: #7f4b1e">
+          OTP
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body p-3">
+        <div class="form-group">
+          <label>Enter OTP</label>
+          <input type="text" class="form-control" placeholder="OTP" #otpBox />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          [class.disable-btn]="loading"
+          type="button"
+          class="modal-submit"
+          (click)="loginWIthOTP(otpBox.value, loginEmail.value)"
+        >
+          Login
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            *ngIf="loading"
+          ></span>
+        </button>
+        <button
+          *ngIf="Sponsorship"
+          [class.disable-btn]="loading"
+          type="button"
+          class="modal-submit"
+          (click)="loginWIthOTP(otpBox.value, loginEmail.value)"
+        >
+          Login
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            *ngIf="loading"
+          ></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="display: none">
+  <button
+    type="button"
+    data-bs-dismiss="modal"
+    data-bs-target="#loginModal"
+    #closeLoginModal
+  ></button>
+  <button
+    type="button"
+    data-bs-toggle="modal"
+    data-bs-target="#loginModal"
+    data-bs-target="#loginModal"
+    #openLoginPopup
+  ></button>
+  <button
+    type="button"
+    data-bs-toggle="modal"
+    data-bs-target="#otpModal"
+    data-bs-target="#otpModal"
+    #openOtpModal
+  ></button>
+  <button
+    type="button"
+    data-bs-dismiss="modal"
+    data-bs-target="#otpModal"
+    data-bs-target="#otpModal"
+    #closeOtpModal
+  ></button>
+  <button
+    type="button"
+    data-bs-dismiss="modal"
+    data-bs-target="#roleModal"
+    #closeroleModal
+  ></button>
+  <button
+    type="button"
+    data-bs-toggle="modal"
+    data-bs-target="#roleModal"
+    data-bs-target="#roleModal"
+    #openroleModal
+  ></button>
 </div>
 
 <div class="search-area">
@@ -97,251 +228,11 @@
         <div class="search-bar">
           <div class="search-bar-tablecell">
             <h3>Search For:</h3>
-            <input type="text" placeholder="Keywords">
+            <input type="text" placeholder="Keywords" />
             <button type="submit">Search <i class="fas fa-search"></i></button>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-
-
-
- <!-- login code is working but now mela irukathunala work agala header container la irutha work agum
-but flow correction ituku -->
-<section>
-
-  
-  <ng-container *ngIf="!token">
-    <span   data-bs-toggle="modal" data-bs-target="#roleModal"
-      >Login
-    </span>
-    <span   [routerLinkActive]="['active']" routerLink="/register"
-      >SignUp</span
-    >
-  </ng-container>
- 
-</section>
-
-
-<!-- Login Modal -->
-<div
-class="modal fade"
-id="loginModal"
-tabindex="-1"
-aria-labelledby="loginModal"
-aria-hidden="true"
->
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel" style="color: #7f4b1e">
-        Login
-      </h5>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="modal"
-        aria-label="Close"
-      ></button>
-    </div>
-    <div class="modal-body p-3">
-      <div class="form-group">
-        <label>Email</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Email Id"
-          #loginEmail
-        />
-      </div>
-    </div>
-    <div class="modal-footer">
-      <!-- Donor Login Button -->
-      <button
-        *ngIf="donor"
-        [class.disable-btn]="loading"
-        type="button"
-        class="modal-submit"
-        (click)="openOtp(loginEmail.value, 'Donor')"
-      >
-        Send OTP
-        <span
-          class="spinner-border spinner-border-sm"
-          role="status"
-          *ngIf="loading"
-        ></span>
-      </button>
-
-      <!-- Sponsorship Login Button -->
-      <button
-        *ngIf="Sponsorship"
-        [class.disable-btn]="loading"
-        type="button"
-        class="modal-submit"
-        (click)="openOtp(loginEmail.value, 'sponsorship')"
-      >
-        Send OTP
-        <span
-          class="spinner-border spinner-border-sm"
-          role="status"
-          *ngIf="loading"
-        ></span>
-      </button>
-    </div>
-  </div>
-</div>
-</div>
-
-<!--OTP Modal -->
-<div
-class="modal fade"
-id="otpModal"
-tabindex="-1"
-aria-labelledby="otpModal"
-aria-hidden="true"
->
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel" style="color: #7f4b1e">
-        OTP
-      </h5>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="modal"
-        aria-label="Close"
-      ></button>
-    </div>
-    <div class="modal-body p-3">
-      <div class="form-group">
-        <label>Enter OTP</label>
-        <input type="text" class="form-control" placeholder="OTP" #otpBox />
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button
-        *ngIf="donor"
-        [class.disable-btn]="loading"
-        type="button"
-        class="modal-submit"
-        (click)="loginWIthOTP(otpBox.value, loginEmail.value, 'donor')"
-      >
-        Login
-        <span
-          class="spinner-border spinner-border-sm"
-          role="status"
-          *ngIf="loading"
-        ></span>
-      </button>
-      <button
-        *ngIf="Sponsorship"
-        [class.disable-btn]="loading"
-        type="button"
-        class="modal-submit"
-        (click)="loginWIthOTP(otpBox.value, loginEmail.value, 'sponsorship')"
-      >
-        Login
-        <span
-          class="spinner-border spinner-border-sm"
-          role="status"
-          *ngIf="loading"
-        ></span>
-      </button>
-    </div>
-  </div>
-</div>
-</div>
-<!-- rolemodel -->
-
-<div
-class="modal fade"
-id="roleModal"
-tabindex="-1"
-aria-labelledby="roleModal"
-aria-hidden="true"
->
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel" style="color: #7f4b1e">
-        Choose Your Role
-      </h5>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="modal"
-        aria-label="Close"
-      ></button>
-    </div>
-    <div class="modal-body p-3">
-      <div class="row">
-        <div class="col-md-6 text-center">
-          <div class="p-5 mb-4 userbox" (click)="opendonorlogin()">
-            <label>
-             
-              <br />
-              Donor
-            </label>
-          </div>
-        </div>
-        <div class="col-md-6 text-center">
-          <div class="p-5 mb-4 userbox" (click)="openrecipientlogin()">
-            <label>
-             
-              <br />
-              Recipient
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<div style="display: none">
-<button
-  type="button"
-  data-bs-dismiss="modal"
-  data-bs-target="#loginModal"
-  #closeLoginModal
-></button>
-<button
-  type="button"
-  data-bs-toggle="modal"
-  data-bs-target="#loginModal"
-  data-bs-target="#loginModal"
-  #openLoginPopup
-></button>
-<button
-  type="button"
-  data-bs-toggle="modal"
-  data-bs-target="#otpModal"
-  data-bs-target="#otpModal"
-  #openOtpModal
-></button>
-<button
-  type="button"
-  data-bs-dismiss="modal"
-  data-bs-target="#otpModal"
-  data-bs-target="#otpModal"
-  #closeOtpModal
-></button>
-<button
-  type="button"
-  data-bs-dismiss="modal"
-  data-bs-target="#roleModal"
-  #closeroleModal
-></button>
-<button
-  type="button"
-  data-bs-toggle="modal"
-  data-bs-target="#roleModal"
-  data-bs-target="#roleModal"
-  #openroleModal
-></button>
 </div>
