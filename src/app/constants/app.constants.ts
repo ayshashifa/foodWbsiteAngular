@@ -30,5 +30,6 @@ export const appApiResources = {
   signUp:createUrl('/signup'),
   login:createUrl('/login'),
   otpVerify:createUrl('/verifyOtp'),
+  getUserDetail:createUrl('/getUserDetail'),
   getUserData:createUrl( '/userdata'),
 };
